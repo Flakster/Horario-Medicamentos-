@@ -4,10 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" type="text/css" href="style.css">
-<title>JS methods</title>
+<style>
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 50px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+<title>Horario Medicamentos</title>
 </head>
 <body>
+<link rel="stylesheet" type="text/css" href="style.css">
 <script type="text/javascript">
 const startups = [
 {name: "Epicop", platform: "Mobile dev", location: "Chanchalguda",year:95},
@@ -17,23 +31,8 @@ const startups = [
 {name: "Ion Tech", platform: "Hybrid dev", location: "Pune",year:45},
 ];
 const ages = [33,43,18,16,15,10,25,30,40];
-//forloop
-// for(let i=0; i< startups.length; i++) {
-// 	console.log(startups[i]);
-// }
-//forEach
-// const startup = startups.forEach(start => console.log(start));
-//filter
-// const filteredValue = startups.filter(startup => startup.year > 60 ? console.log(startup) : console.log("Ohh shit!"));
-//map
-// const mapped = startups.map(function(startup) {
-// 	console.log(`${startup.name} [${startup.location} - ${startup.platform} ]`);
-// })
-//sort
-// const sorted = ages.sort((a,b) => (a>b ? console.log(a) : console.log(b)));
-//reduce
-// const ageSum = ages.reduce((total,age) => total+age,0);
-// console.log(ageSum);
+
+
 speaks = [
   {
     "name": "Alex",
@@ -224,79 +223,73 @@ speaks = [
     "lang": "cs-CZ"
   }
 ];
-const msg = new SpeechSynthesisUtterance();
-msg.volume = 1; // 0 to 1
-msg.rate = 1; // 0.1 to 10
-msg.pitch = 1.5; // 0 to 2
-var d= new Date();
-var horas=d.getHours();
-var minutos=d.getMinutes();
-var totalminutos=horas*60+minutos
-if (horas >12) {
-	horas=horas-12
-	if (horas > 6) 
-		jornada='Noche';
+
+function principal(){
+
+	const msg = new SpeechSynthesisUtterance();
+	msg.volume = 1; // 0 to 1
+	msg.rate = 1; // 0.1 to 10
+	msg.pitch = 1.5; // 0 to 2
+	var d= new Date();
+	var horas=d.getHours();
+	var minutos=d.getMinutes();
+	var totalminutos=horas*60+minutos
+	if (horas >12) {
+		horas=horas-12
+		if (horas > 6) 
+			jornada='Noche';
+		else
+			jornada='Tarde';
+	}
+	else{
+		jornada='Mañana';
+	}
+	if (minutos > 0)
+		pico = ' y ' +minutos+ 'minutos';
 	else
-		jornada='Tarde';
-}
-else{
-	jornada='Mañana';
-}
-if (minutos > 0)
-	pico = ' y ' +minutos+ 'minutos';
-else
-	pico = ' en punto';
-consejo='este horario aun no ha sido programado';
-if (totalminutos<420)
-   consejo='Puede desayunar hasta antes de las siete. La próxima pastilla es a las ocho y media de la mañana';
-if (totalminutos>=420&&totalminutos<510)
-   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves. La próxima pastilla es a las ocho y media de la mañana';
-if (totalminutos>=510&&totalminutos<530)
-   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves';
-if (totalminutos>=530&&totalminutos<630)
-   consejo='Puede tomar medias nueves hasta antes de las diez y media. La próxima pastilla es a las doce del día';
-if (totalminutos>=630&&totalminutos<720)
-   consejo='Debe esperar hasta las doce y veinte para almorzar. La próxima pastilla es a las doce del día';
-if (totalminutos>=720&&totalminutos<740)
-   consejo='Debe esperar hasta las doce y veinte para almorzar.';
-if (totalminutos>=740&&totalminutos<840)
-   consejo='Puede almorzar hasta antes de las dos. La próxima pastilla es a las tres y media de la tarde.';
-if (totalminutos>=840&&totalminutos<930)
-   consejo='Debe esperar hasta las tres y cincuenta para tomar onces. La próxima pastilla es a las tres y media de la tarde.';
-if (totalminutos>=930&&totalminutos<950)
-   consejo='Debe esperar hasta las tres y cincuenta para tomar onces';
-if (totalminutos>=950&&totalminutos<1050)
-   consejo='Puede tomar onces hasta las cinco y treinta. La próxima pastilla es a las ocho y media de la noche';
-if (totalminutos>=1050&&totalminutos<1140)
-   consejo='Puede comer hasta las siete. La próxima pastilla es a las ocho y media de la noche';
-if (totalminutos>=1140&&totalminutos<1230)
-   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. La próxima pastilla es a las ocho y media de la noche';
-if (totalminutos>=1230&&totalminutos<1250)
-   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. ';
-if (totalminutos>=1250&&totalminutos<1260)
-   consejo='Si quiere comer algo más, tendría que ser antes de las 9 y no acostarse muy temprano ';
-if (totalminutos>=1260)
-   consejo='Es mejor no comer más hasta mañana';
+		pico = ' en punto';
+	consejo='este horario aun no ha sido programado';
+	if (totalminutos<420)
+	   consejo='Puede desayunar hasta antes de las siete. La próxima pastilla es a las ocho y media de la mañana';
+	if (totalminutos>=420&&totalminutos<510)
+	   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves. La próxima pastilla es a las ocho y media de la mañana';
+	if (totalminutos>=510&&totalminutos<530)
+	   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves';
+	if (totalminutos>=530&&totalminutos<630)
+	   consejo='Puede tomar medias nueves hasta antes de las diez y media. La próxima pastilla es a las doce del día';
+	if (totalminutos>=630&&totalminutos<720)
+	   consejo='Debe esperar hasta las doce y veinte para almorzar. La próxima pastilla es a las doce del día';
+	if (totalminutos>=720&&totalminutos<740)
+	   consejo='Debe esperar hasta las doce y veinte para almorzar.';
+	if (totalminutos>=740&&totalminutos<840)
+	   consejo='Puede almorzar hasta antes de las dos. La próxima pastilla es a las tres y media de la tarde.';
+	if (totalminutos>=840&&totalminutos<930)
+	   consejo='Debe esperar hasta las tres y cincuenta para tomar onces. La próxima pastilla es a las tres y media de la tarde.';
+	if (totalminutos>=930&&totalminutos<950)
+	   consejo='Debe esperar hasta las tres y cincuenta para tomar onces';
+	if (totalminutos>=950&&totalminutos<1050)
+	   consejo='Puede tomar onces hasta las cinco y treinta. La próxima pastilla es a las ocho y media de la noche';
+	if (totalminutos>=1050&&totalminutos<1140)
+	   consejo='Puede comer hasta las siete. La próxima pastilla es a las ocho y media de la noche';
+	if (totalminutos>=1140&&totalminutos<1230)
+	   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. La próxima pastilla es a las ocho y media de la noche';
+	if (totalminutos>=1230&&totalminutos<1250)
+	   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. ';
+	if (totalminutos>=1250&&totalminutos<1260)
+	   consejo='Si quiere comer algo más, tendría que ser antes de las 9 y no acostarse muy temprano ';
+	if (totalminutos>=1260)
+	   consejo='Es mejor no comer más hasta mañana';
 
 
-msg.text  = "Son las "+horas+pico+" de la"+ jornada+consejo ;
-const voice = speaks[35]; //47
-console.log(`Voice: ${voice.name} and Lang: ${voice.lang}`);
-msg.voiceURI = voice.name;
-msg.lang = voice.lang;
-speechSynthesis.speak(msg);
-// const msg = new SpeechSynthesisUtterance();
-// msg.volume = 1; // 0 to 1
-// msg.rate = 1; // 0.1 to 10
-// msg.pitch = 1; //0 to 2
-// msg.text = "Hello, world";
-// const voice = speaks[4] // 47 total
-// console.log(`voice: ${voice.name}, language: ${voice.lang}`)
-// msg.voiceURI = voice.name;
-// msg.lang = voice.lang;
-// speechSynthesis.speak(msg);
+	msg.text  = "Son las "+horas+pico+" de la"+ jornada+consejo ;
+	const voice = speaks[35]; //47
+	console.log(`Voice: ${voice.name} and Lang: ${voice.lang}`);
+	msg.voiceURI = voice.name;
+	msg.lang = voice.lang;
+	speechSynthesis.speak(msg);
+}
 </script>
-
+<button name="button" onclick="principal()" class="button">Qué debo hacer</button>
 </body>
 </html>
 
