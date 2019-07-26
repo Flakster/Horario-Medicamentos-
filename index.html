@@ -228,8 +228,8 @@ function principal(){
 
 	const msg = new SpeechSynthesisUtterance();
 	msg.volume = 1; // 0 to 1
-	msg.rate = 0.5; // 0.1 to 10
-	msg.pitch = 1.5; // 0 to 2
+	msg.rate = 0.7; // 0.1 to 10
+	msg.pitch = 1; // 0 to 2
 	var d= new Date();
 	var horas=d.getHours();
 	var minutos=d.getMinutes();
@@ -237,12 +237,12 @@ function principal(){
 	if (horas >12) {
 		horas=horas-12
 		if (horas > 6) 
-			jornada='Noche';
+			jornada='Noche.';
 		else
-			jornada='Tarde';
+			jornada='Tarde.';
 	}
 	else{
-		jornada='Mañana';
+		jornada='Mañana.';
 	}
 	if (minutos > 0)
 		pico = ' y ' +minutos+ 'minutos';
