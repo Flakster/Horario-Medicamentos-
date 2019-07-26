@@ -23,15 +23,6 @@
 <body>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script type="text/javascript">
-const startups = [
-{name: "Epicop", platform: "Mobile dev", location: "Chanchalguda",year:95},
-{name: "Sizmic", platform: "Web dev", location: "Hyderabad",year:80},
-{name: "Plugmatter", platform: "Wordpress", location: "Hyderabad",year:70},
-{name: "Mazik Global", platform: "Desktop dev", location: "Bangalore",year:42},
-{name: "Ion Tech", platform: "Hybrid dev", location: "Pune",year:45},
-];
-const ages = [33,43,18,16,15,10,25,30,40];
-
 
 speaks = [
   {
@@ -228,8 +219,8 @@ function principal(){
 
 	const msg = new SpeechSynthesisUtterance();
 	msg.volume = 1; // 0 to 1
-	msg.rate = 0.7; // 0.1 to 10
-	msg.pitch = 1; // 0 to 2
+	msg.rate = 0.9; // 0.1 to 10
+	msg.pitch = 1.5; // 0 to 2
 	var d= new Date();
 	var horas=d.getHours();
 	var minutos=d.getMinutes();
@@ -237,12 +228,12 @@ function principal(){
 	if (horas >12) {
 		horas=horas-12
 		if (horas > 6) 
-			jornada='Noche.';
+			jornada='Noche,';
 		else
-			jornada='Tarde.';
+			jornada='Tarde,';
 	}
 	else{
-		jornada='Mañana.';
+		jornada='Mañana,';
 	}
 	if (minutos > 0)
 		pico = ' y ' +minutos+ 'minutos';
@@ -281,7 +272,10 @@ function principal(){
 	   consejo='Es mejor no comer más hasta mañana';
 
 
-	msg.text  = "Son las "+horas+pico+" de la"+ jornada+consejo ;
+	if (horas==1)
+           msg.text="Es la una "+pico+" de la"+ jornada+consejo ;
+        else
+           msg.text  = "Son las "+horas+pico+" de la"+ jornada+consejo ;
 	const voice = speaks[8]; //47
 	console.log(`Voice: ${voice.name} and Lang: ${voice.lang}`);
 	msg.voiceURI = voice.name;
@@ -292,4 +286,5 @@ function principal(){
 <button name="button" onclick="principal()" class="button">Qué debo hacer</button>
 </body>
 </html>
+
 
