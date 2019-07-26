@@ -1,6 +1,5 @@
-<!-- Bismillah YBM -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -231,6 +230,8 @@ msg.rate = 1; // 0.1 to 10
 msg.pitch = 1.5; // 0 to 2
 var d= new Date();
 var horas=d.getHours();
+var minutos=d.getMinutes();
+var totalminutos=horas*60+minutos
 if (horas >12) {
 	horas=horas-12
 	if (horas > 6) 
@@ -241,12 +242,44 @@ if (horas >12) {
 else{
 	jornada='Mañana';
 }
-var minutos=d.getMinutes();
 if (minutos > 0)
 	pico = ' y ' +minutos+ 'minutos';
 else
 	pico = ' en punto';
-msg.text  = "Son las "+horas+pico+" de la"+ jornada+'.' ;
+consejo='este horario aun no ha sido programado';
+if (totalminutos<420)
+   consejo='Puede desayunar hasta antes de las siete. La próxima pastilla es a las ocho y media de la mañana';
+if (totalminutos>=420&&totalminutos<510)
+   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves. La próxima pastilla es a las ocho y media de la mañana';
+if (totalminutos>=510&&totalminutos<530)
+   consejo='Debe esperar hasta las ocho y cincuenta para tomar medias nueves';
+if (totalminutos>=530&&totalminutos<630)
+   consejo='Puede tomar medias nueves hasta antes de las diez y media. La próxima pastilla es a las doce del día';
+if (totalminutos>=630&&totalminutos<720)
+   consejo='Debe esperar hasta las doce y veinte para almorzar. La próxima pastilla es a las doce del día';
+if (totalminutos>=720&&totalminutos<740)
+   consejo='Debe esperar hasta las doce y veinte para almorzar.';
+if (totalminutos>=740&&totalminutos<840)
+   consejo='Puede almorzar hasta antes de las dos. La próxima pastilla es a las tres y media de la tarde.';
+if (totalminutos>=840&&totalminutos<930)
+   consejo='Debe esperar hasta las tres y cincuenta para tomar onces. La próxima pastilla es a las tres y media de la tarde.';
+if (totalminutos>=930&&totalminutos<950)
+   consejo='Debe esperar hasta las tres y cincuenta para tomar onces';
+if (totalminutos>=950&&totalminutos<1050)
+   consejo='Puede tomar onces hasta las cinco y treinta. La próxima pastilla es a las ocho y media de la noche';
+if (totalminutos>=1050&&totalminutos<1140)
+   consejo='Puede comer hasta las siete. La próxima pastilla es a las ocho y media de la noche';
+if (totalminutos>=1140&&totalminutos<1230)
+   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. La próxima pastilla es a las ocho y media de la noche';
+if (totalminutos>=1230&&totalminutos<1250)
+   consejo='Si quiere comer algo más, debe esperar hasta las ocho y cincuenta. ';
+if (totalminutos>=1250&&totalminutos<1260)
+   consejo='Si quiere comer algo más, tendría que ser antes de las 9 y no acostarse muy temprano ';
+if (totalminutos>=1260)
+   consejo='Es mejor no comer más hasta mañana';
+
+
+msg.text  = "Son las "+horas+pico+" de la"+ jornada+consejo ;
 const voice = speaks[35]; //47
 console.log(`Voice: ${voice.name} and Lang: ${voice.lang}`);
 msg.voiceURI = voice.name;
@@ -266,5 +299,4 @@ speechSynthesis.speak(msg);
 
 </body>
 </html>
-
 
